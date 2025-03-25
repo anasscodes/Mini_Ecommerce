@@ -30,7 +30,9 @@ if(isset($_SESSION['utilisateur'])){
             <li class="nav-item">
               <a class="nav-link " aria-current="page" href="produit.php">Ajouter Produit</a>
             </li>
-
+            <li class="nav-item">
+              <a class="nav-link " aria-current="page" href="deconnexion.php">Deconnexion</a>
+            </li>
             <?php
           }else{
           ?>
