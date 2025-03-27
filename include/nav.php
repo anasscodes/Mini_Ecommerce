@@ -23,7 +23,9 @@ if(isset($_SESSION['utilisateur'])){
         <?php
           if($connecte){
             ?>
-            
+            <li class="nav-item">
+              <a class="nav-link " aria-current="page" href="categories.php">Liste des Categories</a>
+            </li>
             <li class="nav-item">
               <a class="nav-link " aria-current="page" href="categorie.php">Ajouter Categorie</a>
             </li>
