@@ -24,13 +24,7 @@
             require_once 'include/database.php';
             $sqlState = $pdo->prepare('INSERT INTO categorie(libelle,description) VALUES(?,?)');
             $sqlState->execute([$libelle,$description]);
-            ?>
-
-            <div class="alert alert-success">
-                La categorie <?php echo $libelle ?> est bien ajoutée.
-            </div>
-
-            <?php
+            header('location: categories.php');
         }else{
         ?>
           <div class="alert alert-danger">

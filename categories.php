@@ -16,7 +16,7 @@
 
 <div class=" container my-5"> 
     <h2>Liste des Categories</h2>
-    <a href="categorie.php" class="btn btn-primary">Ajouter Categorie</a>
+    <a href="produit.php" class="btn btn-primary">Ajouter Produit</a>
     <table class="table table-striped table-hover">
         <thead>
             <tr>
@@ -24,7 +24,7 @@
                 <th>Libelle</th>
                 <th>Description</th>
                 <th>Date Creation</th>
-                <th>Depirations</th>
+                <th>Operations</th>
             </tr>
         </thead>
         <tbody>
@@ -39,8 +39,8 @@
                         <td><?php echo $categorie['description']?></td>
                         <td><?php echo $categorie['date-creation']?></td>
                         <td>
-                            <input type="submit" class="btn btn-primary" value="Modifier">
-                            <input type="submit" class="btn btn-danger" value="Supprimer">
+                            <a href="modifier_categorie.php?id=<?php echo $categorie['id'] ?>" class="btn btn-primary btn-sm">Modifier</a>
+                            <a href="supprimer_categorie.php?id=<?php echo $categorie['id'] ?>" onclick="return confirm('Voulez vous vraiment supprimer la categorie <?php echo $categorie['libelle']?> ');" class="btn btn-danger btn-sm">Supprimer</a>
                         </td>
 
                     </tr>

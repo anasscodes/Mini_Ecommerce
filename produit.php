@@ -30,11 +30,7 @@
                     $inserted = $sqlState->execute([$libelle,$prix,$discount,$categorie,$date]);
                     if($inserted){
 
-                    ?>
-                        <div class="alert alert-success" role="alert">
-                            Le Produit <?php echo $libelle ?> est bien ajoutée.
-                        </div>
-                    <?php
+                        header('location: produits.php');
 
                     }else{
                         ?>
