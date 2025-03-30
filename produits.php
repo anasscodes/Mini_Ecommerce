@@ -46,8 +46,8 @@
                         <td><?= $produit->categorie_libelle?></td>
                         <td><?= $produit->date_creation?></td>
                         <td>
-                            <input type="submit" class="btn btn-primary btn-sm" value="Modifier">
-                            <input type="submit" class="btn btn-danger btn-sm" value="Supprimer">
+                        <a href="modifier_produit.php?id=<?php echo $produit->id ?>" class="btn btn-primary btn-sm">Modifier</a>
+                        <a href="supprimer_produit.php?id=<?php echo $produit->id ?>" onclick="return confirm('Voulez vous vraiment supprimer le produit <?php echo $produit->libelle ?> ');" class="btn btn-danger btn-sm">Supprimer</a>
                         </td>
 
                     </tr>
