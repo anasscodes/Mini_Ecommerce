@@ -8,13 +8,15 @@
     <title>Samara</title>
 
     <link rel="stylesheet" href="../bootstrap-5.3.3-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"  />
+
 </head>
 <body>
 <?php include '../include/nav_front.php' ?>
 
 <div class=" container my-5 w-50"> 
 
-        <h3>Liste des categories</h3>
+        <h3><i class="fa-solid fa-list"></i> Liste des categories</h3>
 
         <?php 
             require_once '../include/database.php';
@@ -27,7 +29,7 @@
             ?>
                 <li class="list-group-item">
                     <a class="btn btn-light" href="categorie.php?id=<?php echo $categorie->id ?>">
-                        <?php echo $categorie->libelle ?>
+                        <i class="<?php echo $categorie->icone ?>"></i> <?php echo $categorie->libelle ?>
                     </a>
                 </li>
             <?php

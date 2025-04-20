@@ -25,6 +25,7 @@
                 <th>Prix</th>
                 <th>Discount</th>
                 <th>Categorie</th>
+                <th>Image</th>
                 <th>Date Creation</th>
                 <th>Operations</th>
             </tr>
@@ -44,6 +45,7 @@
                         <td><?= $produit->prix?> MAD</td>
                         <td><?= $produit->discount?> %</td>
                         <td><?= $produit->categorie_libelle?></td>
+                        <td> <img class="img img-fluid" width="90" src="upload/produits/<?= $produit->image?>" alt="<?= $produit->libelle?>"></td>
                         <td><?= $produit->date_creation?></td>
                         <td>
                         <a href="modifier_produit.php?id=<?php echo $produit->id ?>" class="btn btn-primary btn-sm">Modifier</a>

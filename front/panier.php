@@ -1,0 +1,47 @@
+
+<?php
+        session_start();
+
+        if (!isset($_SESSION['utilisateur'])) {
+            header('Location: ../connexion.php');
+            exit();
+        }
+
+        $id = urlencode(trim($_POST['id']));
+        $qty = $_POST['qty'];
+        $idUtilisateur = $_SESSION['utilisateur']['id'];
+
+            if (!isset($_SESSION['panier'][$idUtilisateur])) {
+                $_SESSION['panier'][$idUtilisateur] = [];
+            }
+            $_SESSION['panier'][$idUtilisateur][$id] = $qty;
+        
+
+        header("Location: produit.php?id=$id");
+        exit();
+?>
+
+
+
+
+
+
+
+
+
+
+    <!-- session_start();
+    if(!isset($_SESSION['utilisateur'])){
+        header('location: ../connexion.php');
+    }
+    
+    $id = $_POST['id'];
+    $qty = $_POST['qty'];
+    $idUtilisateur = $_SESSION['utilisateur']['id'];
+    if(!empty($id) && !empty($qty)){
+        if(!isset($_SESSION['panier'][$idUtilisateur])){
+            $_SESSION['panier'][$idUtilisateur] = [];
+        }
+        $_SESSION['panier'][$idUtilisateur][$id] = $qty;
+    }
+        header("location: produit.php?id=$id"); -->

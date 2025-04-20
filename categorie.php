@@ -20,10 +20,12 @@
         if(isset($_POST['ajouter'])){
             $libelle = $_POST['libelle'];
             $description = $_POST['description'];
+            $icone = $_POST['icone'];
+
         if(!empty($libelle) && !empty($description)){
             require_once 'include/database.php';
-            $sqlState = $pdo->prepare('INSERT INTO categorie(libelle,description) VALUES(?,?)');
-            $sqlState->execute([$libelle,$description]);
+            $sqlState = $pdo->prepare('INSERT INTO categorie(libelle,description,icone) VALUES(?,?,?)');
+            $sqlState->execute([$libelle,$description,$icone]);
             header('location: categories.php');
         }else{
         ?>
@@ -49,6 +51,10 @@
             <label  class="col-form-label">Description</label>
         
             <textarea class="form-control" name="description" ></textarea>
+
+            <label  class="col-form-label">Icône</label>
+        
+            <input type="text" class="form-control" name="icone">
     
             <input type="submit" value="Ajouter Categorie" class="btn btn-primary my-4" name="ajouter">
         

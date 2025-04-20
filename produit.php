@@ -23,11 +23,24 @@
                 $prix = $_POST['prix'];
                 $discount = $_POST['discount'];
                 $categorie = $_POST['categorie'];
+                $description = $_POST['description'];
                 $date = date('Y-m-d');
 
+                // echo"<pre>";
+                // print_r($_FILES);
+
+                $filename='produit.png';
+                if(!empty($_FILES['image']['name'])){
+                    $image = $_FILES['image']['name'];
+                    $filename = uniqid().$image;
+                    move_uploaded_file($_FILES['image']['tmp_name'], 'upload/produits/' . $filename );
+                }
+                // echo"</pre>";
+                //     die();
+                
                 if(!empty($libelle) && !empty($prix) && !empty($categorie)){
-                    $sqlState = $pdo->prepare('INSERT INTO produit VALUES(null,?,?,?,?,?)');
-                    $inserted = $sqlState->execute([$libelle,$prix,$discount,$categorie,$date]);
+                    $sqlState = $pdo->prepare('INSERT INTO produit VALUES(null,?,?,?,?,?,?,?)');
+                    $inserted = $sqlState->execute([$libelle,$prix,$discount,$categorie,$date,$description,$filename]);
                     if($inserted){
 
                         header('location: produits.php');
@@ -51,7 +64,7 @@
         ?>
 
         <h4>Ajouter Produit</h4>
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
 
         <div class="row g-3 align-items-center">
 
@@ -63,6 +76,12 @@
 
             <label  class="col-form-label">Discount</label>
             <input type="range" class="form-control" name="discount" min="0" max="90">
+
+            <label  class="col-form-label">Image</label>
+            <input type="file" class="form-control" name="image">
+
+            <label  class="col-form-label">Description</label>
+            <textarea class="form-control" name="description" ></textarea>
 
             <?php
                     $categories = $pdo->query('SELECT * FROM categorie')->fetchAll(PDO::FETCH_ASSOC);

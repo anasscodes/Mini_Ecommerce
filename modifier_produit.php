@@ -28,10 +28,27 @@
                 $prix = $_POST['prix'];
                 $discount = $_POST['discount'];
                 $categorie = $_POST['categorie'];
+                $description = $_POST['description'];
+
+                $filename='';
+                if(!empty($_FILES['image']['name'])){
+                    $image = $_FILES['image']['name'];
+                    $filename = uniqid().$image;
+                    move_uploaded_file($_FILES['image']['tmp_name'], 'upload/produits/' . $filename );
+                }
 
                 if(!empty($libelle) && !empty($prix) && !empty($categorie)){
-                    $sqlState = $pdo->prepare('UPDATE produit SET libelle=?,prix=?,discount=?,id_categorie=? WHERE id=?');
-                    $update = $sqlState->execute([$libelle,$prix,$discount,$categorie,$id]);
+                    if(!empty($filename)){
+                        $query = 'UPDATE produit SET libelle=?,prix=?,discount=?,id_categorie=?,description=?,image=? WHERE id=?';
+                        $sqlState = $pdo->prepare($query);
+                        $update = $sqlState->execute([$libelle,$prix,$discount,$categorie,$description,$filename,$id]);
+                    }else{
+                        $query = 'UPDATE produit SET libelle=?,prix=?,discount=?,id_categorie=?,description=? WHERE id=?';
+                        $sqlState = $pdo->prepare($query);
+                        $update = $sqlState->execute([$libelle,$prix,$discount,$categorie,$description,$id]);
+                    }
+                    
+                    
                     if($update){
 
                         header('location: produits.php');
@@ -55,7 +72,7 @@
         ?>
 
         <h4>Modifier Produit</h4>
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
 
         <div class="row g-3 align-items-center">
             <input type="hidden" class="form-control" name="id" value="<?php echo $produit['id']?>">
@@ -68,6 +85,16 @@
 
             <label  class="col-form-label">Discount</label>
             <input type="range" class="form-control" name="discount" min="0" max="90" value="<?php echo $produit['discount']?>">
+
+            <label  class="col-form-label">Description</label>
+            <textarea class="form-control" name="description" > <?php echo $produit['description']?> </textarea>
+
+            <label  class="col-form-label">Image</label>
+            <input type="file" class="form-control" name="image">
+            <img width="250" class="img img-fluid" src="upload/produits/<?php echo $produit['image']?>"><br>
+            <?php
+            
+            ?>
 
             <?php
                     $categories = $pdo->query('SELECT * FROM categorie')->fetchAll(PDO::FETCH_ASSOC);

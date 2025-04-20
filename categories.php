@@ -8,6 +8,8 @@
     <title>Samara Liste </title>
 
     <link rel="stylesheet" href="bootstrap-5.3.3-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"  />
+
 </head>
 <body>
 
@@ -23,6 +25,7 @@
                 <th>#ID</th>
                 <th>Libelle</th>
                 <th>Description</th>
+                <th>Icone</th>
                 <th>Date Creation</th>
                 <th>Operations</th>
             </tr>
@@ -37,6 +40,9 @@
                         <td><?php echo $categorie['id']?></td>
                         <td><?php echo $categorie['libelle']?></td>
                         <td><?php echo $categorie['description']?></td>
+                        <td>
+                            <i class="<?php echo $categorie['icone']?>"></i>
+                        </td>
                         <td><?php echo $categorie['date-creation']?></td>
                         <td>
                             <a href="modifier_categorie.php?id=<?php echo $categorie['id'] ?>" class="btn btn-primary btn-sm">Modifier</a>

@@ -14,5 +14,6 @@
 
       </ul>
     </div>
+    <a class="btn float-end" href="cart.php"><i class="fa-solid fa-cart-shopping"></i> Panier</a>
   </div>
 </nav>
