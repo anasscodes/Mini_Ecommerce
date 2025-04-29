@@ -29,7 +29,7 @@
 <body>
 <?php include '../include/nav_front.php' ?>
 
-<div class=" container my-5 w-70 "> 
+<div class=" container my-5 w-80 "> 
 
      <h3><?php echo $categorie['libelle'] ?> <span class="<?php echo $categorie['icone'] ?>"></span></h3>
      <div class="container my-4">

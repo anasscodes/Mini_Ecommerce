@@ -14,10 +14,16 @@
             if (!isset($_SESSION['panier'][$idUtilisateur])) {
                 $_SESSION['panier'][$idUtilisateur] = [];
             }
-            $_SESSION['panier'][$idUtilisateur][$id] = $qty;
+            if ($qty == 0){
+                 unset($_SESSION['panier'][$idUtilisateur][$id]);
+
+            }else{
+                $_SESSION['panier'][$idUtilisateur][$id] = $qty;
+
+            }
         
 
-        header("Location: produit.php?id=$id");
+        header("Location:".$_SERVER['HTTP_REFERER']);
         exit();
 ?>
 

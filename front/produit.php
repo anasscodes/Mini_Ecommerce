@@ -40,7 +40,7 @@
 <body>
 <?php include '../include/nav_front.php' ?>
 
-<div class="container my-5 w-50">
+<div class="container my-5 w-80">
     <!-- Affichage du produit -->
     <h3><?php echo htmlspecialchars($produit['libelle']); ?></h3>
     <div class="container my-4">

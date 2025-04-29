@@ -14,6 +14,9 @@
 
       </ul>
     </div>
-    <a class="btn float-end" href="cart.php"><i class="fa-solid fa-cart-shopping"></i> Panier</a>
+    <?php
+      $idUtilisateur = $_SESSION['utilisateur']['id'];
+    ?>
+    <a class="btn float-end" href="ajt_panier.php"><i class="fa-solid fa-cart-shopping"></i> Panier (<?php echo count($_SESSION['panier'][$idUtilisateur]);?>)</a>
   </div>
 </nav>
