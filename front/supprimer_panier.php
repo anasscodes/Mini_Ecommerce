@@ -1,18 +1,19 @@
-
 <?php
-        session_start();
+session_start();
 
-        if (!isset($_SESSION['utilisateur'])) {
-            header('Location: ../connexion.php');
-            exit();
-        }
+if (!isset($_SESSION['utilisateur'])) {
+    header('Location: ../connexion.php');
+    exit();
+}
 
+$id = trim($_POST['id']);
+$idUtilisateur = $_SESSION['utilisateur']['id'];
 
-        $id = urlencode(trim($_POST['id']));
-        $idUtilisateur = $_SESSION['Utilisateur']['id'];
-        unset($_SESSION['panier'][$idUtilisateur][$id]);
-        header("Location:".$_SERVER['HTTP_REFERER']);
-        
+if (isset($_SESSION['panier'][$idUtilisateur][$id])) {
+    unset($_SESSION['panier'][$idUtilisateur][$id]);
+}
+
+// Redirection l page li ja mnha luser
+header("Location: " . $_SERVER['HTTP_REFERER']);
+exit();
 ?>
-
-

@@ -22,15 +22,69 @@ require_once '../include/database.php';
 <?php include '../include/nav_front.php' ?>
 
 <div class="container my-5 w-80"> 
+    <?php 
 
-    <h3>Panier</h3>
+                        $idUtilisateur = $_SESSION['utilisateur']['id'] ?? null;
+                        $panier = $_SESSION['panier'][$idUtilisateur] ?? [];
+
+                        if (!empty($panier)) {
+                            $idProduitsArray = array_keys($panier); // ✅ تعريف المتغير قبل استعماله
+                            $idProduits = implode(',', array_map('intval', $idProduitsArray));
+                            
+                            $stmt = $pdo->query("SELECT * FROM produit WHERE id IN ($idProduits)");
+                            $produits = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                        }
+                            if(isset($_POST['vider'])){
+                                $_SESSION['panier'][$idUtilisateur] = [];
+                            }
+                             if(isset($_POST['valider'])){
+                              $sql = 'INSERT INTO ligne_commend (id_produit,id_command,prix,quantité,total) VALUES';
+                              $total = 0;
+                              $prixProduit = [];
+                              foreach ($produits as $produit) {
+                                $idProduit = $produit['id'];
+                                $totalProduit = $produit['prix'] * $panier[$idProduit]; // ✅ هنا
+                                $total += $totalProduit ; // ✅ وهنا
+                                $prixProduit[$idProduit] = [
+                                    'id_produit' => $idProduit,
+                                    'quantite' => $panier[$idProduit],
+                                    'prix' => $produit['prix'],
+                                    'total' => $totalProduit
+                                ];
+                              }
+                                
+                             $sqlStateCommand = $pdo->prepare("INSERT INTO commend (id_client, total) VALUES (?, ?)");
+                            $sqlStateCommand->execute([$idUtilisateur, $total]);
+                                $idCommend = $pdo->lastInsertId();
+                                $args = [];
+                                foreach ($prixProduit as $produit) {
+                                    $id = $produit['id_produit'];
+                                    $sql.= "(:id_produit$id, '$idCommend', :prix$id, :quantite$id, :total$id),";
+                                    //  $args[] = [$produit['id_produit'], $idCommend, $produit['prix'], $produit['quantite'], $produit['total']];
+                                }
+                                $sql = substr($sql, 0, -1); // Remove the last comma
+                                $sqlState = $pdo->prepare($sql);
+                                foreach ($prixProduit as $produit) {
+                                    $id = $produit['id_produit'];
+                                    $sqlState->bindParam(":id_produit$id", $produit['id_produit'], PDO::PARAM_INT);
+                                    $sqlState->bindParam(":prix$id", $produit['prix'], PDO::PARAM_STR);
+                                    $sqlState->bindParam(":quantite$id", $produit['quantite'], PDO::PARAM_INT);
+                                    $sqlState->bindParam(":total$id", $produit['total'], PDO::PARAM_STR);
+                                }
+                                  $inserted = $sqlState->execute();
+                                  var_dump($inserted);
+                            }
+                            
+        ?>
+
+    <h3>Panier (<?php echo $panierCount; ?>)</h3>
     <div class="container my-4">
         <div class="row">
 
 <?php
 
-$idUtilisateur = $_SESSION['utilisateur']['id'] ?? null;
-$panier = $_SESSION['panier'][$idUtilisateur] ?? [];
+// $idUtilisateur = $_SESSION['utilisateur']['id'] ?? null;
+// $panier = $_SESSION['panier'][$idUtilisateur] ?? [];
 
 if (!empty($panier)) {
 
@@ -38,9 +92,9 @@ if (!empty($panier)) {
 
     if (!empty($idProduitsArray)) {
 
-        $idProduits = implode(',', array_map('intval', $idProduitsArray));
-        $stmt = $pdo->query("SELECT * FROM produit WHERE id IN ($idProduits)");
-        $produits = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        // $idProduits = implode(',', array_map('intval', $idProduitsArray));
+        // $stmt = $pdo->query("SELECT * FROM produit WHERE id IN ($idProduits)");
+        // $produits = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         if (!empty($produits)) {
             // Si produits disponibles, afficher la liste
@@ -83,11 +137,7 @@ if (!empty($panier)) {
                 </tr>
                 <tr>
                     <td colspan="6" align="right">
-                        <?php 
-                            if(isset($_POST['vider'])){
-                                $_SESSION['panier'][$idUtilisateur] = [];
-                            }
-                        ?>
+                        
                         <form method="POST">
                             <input type="submit" class="btn btn-success" name="valider" value="Valider la commande">
                             <input onclick="return confirm('Voulez vous vraiment vider le panier ?!')" type="submit" class="btn btn-danger" name="vider" value="Vider le panier">
