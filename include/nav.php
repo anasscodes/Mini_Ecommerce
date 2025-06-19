@@ -16,35 +16,54 @@ if(isset($_SESSION['utilisateur'])){
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="index.php">Ajouter utilisateur</a>
-        </li>
+       <li class="nav-item">
+        <a class="nav-link " href="index.php">
+          <i class="fas fa-user-plus"></i> Ajouter utilisateur
+        </a>
+      </li>
 
         <?php
           if($connecte){
             ?>
-            <li class="nav-item">
-              <a class="nav-link " aria-current="page" href="produits.php">Liste des Produits</a>
+              <li class="nav-item">
+              <a class="nav-link" href="produits.php">
+                <i class="fas fa-box"></i> Liste des Produits
+              </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link " aria-current="page" href="categories.php">Liste des Categories</a>
+              <a class="nav-link" href="categories.php">
+                <i class="fas fa-layer-group"></i> Liste des Catégories
+              </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link " aria-current="page" href="categorie.php">Ajouter Categorie</a>
+              <a class="nav-link" href="categorie.php">
+                <i class="fas fa-plus-square"></i> Ajouter Catégorie
+              </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link " aria-current="page" href="produit.php">Ajouter Produit</a>
+              <a class="nav-link" href="produit.php">
+                <i class="fas fa-plus-circle"></i> Ajouter Produit
+              </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link " aria-current="page" href="deconnexion.php">Deconnexion</a>
+              <a class="nav-link" href="commandes.php">
+                <i class="fas fa-receipt"></i> Commandes
+              </a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="deconnexion.php">
+                <i class="fas fa-sign-out-alt"></i> Déconnexion
+              </a>
+            </li>
+           
             <?php
           }else{
           ?>
 
-        <li class="nav-item">
-          <a class="nav-link" href="connexion.php">Connexion</a>
-        </li>
+         <li class="nav-item">
+          <a class="nav-link" href="connexion.php">
+            <i class="fas fa-sign-in-alt"></i> Connexion
+          </a>
 
             <?php
           }
