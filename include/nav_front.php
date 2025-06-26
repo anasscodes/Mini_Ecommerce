@@ -14,19 +14,25 @@ if ($idUtilisateur !== null && isset($_SESSION['panier'][$idUtilisateur]) && is_
 
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
-    <a class="navbar-brand" href="index.php">E-commerce</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <a class="navbar-brand" href="index.php">Samara E-commerce</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
+
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" href="index.php">Liste des Categories</a>
-        </li>
+      <ul class="navbar-nav me-auto">
+        
       </ul>
+
+      <div class="d-flex">
+       <a href="../admin.php" class="btn btn-outline-dark me-2">
+  <i class="fa-solid fa-screwdriver-wrench me-1"></i> Back-Office
+</a>
+        <a class="btn btn-dark" href="ajt_panier.php">
+          <i class="fa-solid fa-cart-shopping"></i> Panier (<?php echo $panierCount; ?>)
+        </a>
+      </div>
     </div>
-    <a class="btn float-end" href="ajt_panier.php">
-      <i class="fa-solid fa-cart-shopping"></i> Panier (<?php echo $panierCount; ?>)
-    </a>
   </div>
 </nav>
