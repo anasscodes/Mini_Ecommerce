@@ -1,15 +1,12 @@
 <?php 
-if (session_status() === PHP_SESSION_NONE) session_start(); 
+if (session_status() === PHP_SESSION_NONE) session_start();
 
-$connecte = false;
-if (isset($_SESSION['utilisateur'])) {
-  $connecte = true;
-}
+$connecte = isset($_SESSION['utilisateur']);
 ?>
 
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
+<nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
   <div class="container-fluid">
-    <a class="navbar-brand" href="index.php">E-commerce</a>
+    <a class="navbar-brand" href="index.php"><i class="fas fa-store"></i> Samara</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
       data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" 
       aria-label="Toggle navigation">
@@ -52,25 +49,27 @@ if (isset($_SESSION['utilisateur'])) {
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="deconnexion.php">
+            <a class="nav-link text-danger" href="deconnexion.php">
               <i class="fas fa-sign-out-alt"></i> Déconnexion
             </a>
           </li>
         <?php else: ?>
           <li class="nav-item">
-            <a class="nav-link" href="connexion.php">
+            <a class="nav-link text-primary" href="connexion.php">
               <i class="fas fa-sign-in-alt"></i> Connexion
             </a>
           </li>
         <?php endif; ?>
       </ul>
 
-      <!-- Bouton Retour Client -->
-      <div class="d-flex">
-        <a href="http://localhost/Project-Ecommerce/Front1/" class="btn btn-outline-dark me-2">
-          Accés Site 
-        </a>
-      </div>
+      <!-- Bouton Accès Site visible uniquement si connecté -->
+      <?php if ($connecte): ?>
+        <div class="d-flex">
+          <a href="http://localhost/Project-Ecommerce/Front1/" class="btn btn-outline-dark me-2">
+            Accès Site
+          </a>
+        </div>
+      <?php endif; ?>
     </div>
   </div>
 </nav>

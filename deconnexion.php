@@ -5,4 +5,5 @@
     session_destroy();
 
     header('location: connexion.php');
+    exit();
 ?>
