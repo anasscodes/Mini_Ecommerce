@@ -191,7 +191,7 @@ $produits = $sqlState->fetchAll(PDO::FETCH_OBJ);
       <?php endforeach; ?>
     <?php } else { ?>
       <div class="col-12">
-        <div class="alert alert-info text-center">Aucun produit trouvé pour cette catégorie.</div>
+        <div class="alert alert-info text-center">"Désolé, cet article n’est plus disponible".</div>
       </div>
     <?php } ?>
   </div>
